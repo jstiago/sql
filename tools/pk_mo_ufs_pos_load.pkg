@@ -1,0 +1,43 @@
+CREATE OR REPLACE PACKAGE TMO."PK_MO_UFS_POS_LOAD" IS
+
+/******************************************************************
+ *
+ *  NAME:       pk_mo_ufs_pos_load.pkg
+ *
+ *  AUTHOR:     Andy Hobson
+ *
+ *  DATE:       08-JUL-2004
+ *
+ *  DESCRIPTION
+ *
+ *  Main processing for Middle Office FISS Transaction and
+ *  Transaction Accounting table loads from the position table in TDB.
+ *
+ *  PROCEDURES
+ *
+ *  pr_mo_pos_cld
+ *  pr_mo_pos_load
+ *
+ *  Change History
+ *
+ *  Date      Version Author   Description
+ *  =====     ======= ======   ===========
+ *  8/7/2004 \main\dev_tdb00002603\1 hobsona tdb00002603 - New system specific position load
+ *  9/9/2004 \main\1 talbotn merge to main
+ *  End Change History
+ *
+ ******************************************************************/
+
+    PROCEDURE pr_mo_pos_cld  ( p_source_id     IN  VARCHAR2
+                             , p_cob_date      IN  DATE
+                             );
+
+    PROCEDURE pr_mo_pos_load ( p_source_id     IN  VARCHAR2
+                             , p_cob_date      IN  DATE
+                             );
+    PROCEDURE pr_mo_cur_trans_stage_load (p_source_id        IN VARCHAR2
+                                         ,p_cob_date         IN DATE);
+                                         
+
+END pk_mo_ufs_pos_load;
+/

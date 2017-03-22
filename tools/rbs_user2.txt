@@ -1,0 +1,7 @@
+select s.username, s.osuser, n.name, t.ubafil,
+t.ubablk, t.used_ublk, t.start_uext, t.start_ubafil
+FROM v$session s, v$transaction t,
+     v$rollstat r, v$rollname n
+WHERE s.saddr = t.ses_addr and
+      t.xidusn = r.usn and
+      r.usn = n.usn;
