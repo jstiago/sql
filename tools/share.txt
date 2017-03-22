@@ -1,0 +1,10 @@
+SELECT
+    TO_NUMBER(p.value)       value
+  , s.bytes                  bytes
+  , (s.bytes/p.value) * 100  percentfree
+FROM
+    v$sgastat    s
+  , v$parameter  p
+WHERE
+      s.name = 'free memory'
+  AND p.name = 'shared_pool_size'
