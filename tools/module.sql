@@ -35,7 +35,7 @@ DECLARE
   PROCEDURE SHOW_BLOCKER_DETAILS(p_INSTANCE IN NUMBER
                                 ,p_SID      IN V$SESSION.SID%TYPE)
   AS
-    v_USERNAME ALL_USERS.USERNAME%TYPE;
+    v_USERNAME V$SESSION.USERNAME%TYPE;
     v_SERIAL#  V$SESSION.SERIAL#%TYPE;
     v_EVENT    V$SESSION.EVENT%TYPE;
     v_STATUS   V$SESSION.STATUS%TYPE;
@@ -185,8 +185,9 @@ BEGIN
 
     DBMS_OUTPUT.PUT_LINE(  '--------------------------------------------' );
     DBMS_OUTPUT.PUT_LINE(  c_SESSION.USERNAME||' node ' || c_SESSION.INST_ID || '('||c_SESSION.SID||','||c_SESSION.SERIAL#||')');
-    DBMS_OUTPUT.PUT_LINE(  'Oracle PID      : ' || v_ORA_PID || ' PK_TDB_ADMIN.PR_KILL_SESSION(' || v_BOX_PID || ') /* ' || c_SESSION.CLIENT_INFO || ' */');
+    DBMS_OUTPUT.PUT_LINE(  'Oracle PID      : ' || v_ORA_PID );
     DBMS_OUTPUT.PUT_LINE(  'Client Info     : ' || c_SESSION.CLIENT_INFO);
+    DBMS_OUTPUT.PUT_LINE(  'Kill Command    : ' || 'exec sys.my_sessions.kill(' || c_SESSION.SID||','||c_SESSION.SERIAL# ||',' || c_SESSION.INST_ID  || ') ');
     DBMS_OUTPUT.PUT_LINE(  'Module          : ' || c_SESSION.MODULE || '  Action: ' || c_SESSION.ACTION);
     DBMS_OUTPUT.PUT_LINE(  'OS User         : ' || c_SESSION.OSUSER || '  Machine(process): ' || c_SESSION.MACHINE || '(' || TO_CHAR(c_SESSION.PROCESS) || ')');
     DBMS_OUTPUT.PUT_LINE(  'Service         : ' || c_SESSION.SERVICE_NAME );

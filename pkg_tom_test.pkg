@@ -1,0 +1,22 @@
+CREATE OR REPLACE PACKAGE pkg_tom_test AS
+
+    g_MATCH     CONSTANT VARCHAR2(1) := '1';
+	g_NOT_MATCH CONSTANT VARCHAR2(1) := '0';
+    
+    
+    g_VARCHAR2_TYPE CONSTANT NUMBER(5) := 1;
+    g_NUMBER_TYPE CONSTANT NUMBER(5)   := 2;
+    g_DATE_TYPE   CONSTANT NUMBER(5)   := 12;
+
+    
+    PROCEDURE test_extract(p_interface VARCHAR2);
+
+
+    PROCEDURE validate_data(p_interface      IN VARCHAR2
+                           ,p_table_name     IN VARCHAR2
+                           ,p_validation     IN VARCHAR2
+                           ,p_validation_sql IN VARCHAR2);
+						 
+
+END pkg_tom_test;
+/

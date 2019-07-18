@@ -1,5 +1,5 @@
 select * 
-from EMP
+from gs_gc.FT_WF_UIWA
 AS OF TIMESTAMP SYSDATE – 1
 /
 select * 

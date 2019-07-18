@@ -10,7 +10,7 @@ DECLARE
   --v1.2 - included PROGRAM in blocker information as it seems useful
   --v1.3 - adding the PID as this is the identifier used in TDB/Oracle to kill sessions
 
-  v_USER            V$SESSION.USERNAME%TYPE := '&USERNAME';
+  v_USER            V$SESSION.USERNAME%TYPE := '&1';
 
   v_OWNER           ALL_PROCEDURES.OWNER%TYPE;
   v_OBJECT_NAME     ALL_PROCEDURES.OBJECT_NAME%TYPE;

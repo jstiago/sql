@@ -1,0 +1,7 @@
+CREATE OR REPLACE PACKAGE stats_pkg AS
+
+    PROCEDURE gather_table_stats(i_table_name IN VARCHAR2
+                                ,i_partition_name IN VARCHAR2 DEFAULT NULL);
+
+END stats_pkg;
+/
