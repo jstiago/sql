@@ -1,0 +1,55 @@
+
+BEGIN
+  DBMS_METADATA.SET_TRANSFORM_PARAM(DBMS_METADATA.SESSION_TRANSFORM,'STORAGE',false);
+  DBMS_METADATA.SET_TRANSFORM_PARAM(DBMS_METADATA.SESSION_TRANSFORM,'PARTITIONING',false);
+  DBMS_METADATA.SET_TRANSFORM_PARAM(DBMS_METADATA.SESSION_TRANSFORM,'SEGMENT_ATTRIBUTES',false);
+  DBMS_METADATA.SET_TRANSFORM_PARAM(DBMS_METADATA.SESSION_TRANSFORM,'SQLTERMINATOR',true);
+  DBMS_METADATA.SET_TRANSFORM_PARAM(DBMS_METADATA.SESSION_TRANSFORM,'PRETTY',true);
+  DBMS_METADATA.SET_TRANSFORM_PARAM(DBMS_METADATA.SESSION_TRANSFORM,'CONSTRAINTS',false);
+  DBMS_METADATA.SET_TRANSFORM_PARAM(DBMS_METADATA.SESSION_TRANSFORM,'REF_CONSTRAINTS',false);
+END;
+/
+
+set heading off;
+set echo off;
+set pagesize 0;      
+-- don't truncate the line output
+-- trim the extra space from linesize when spooling
+set long 99999;      
+set linesize 32767;  
+set trimspool on;    
+
+-- don't truncate this specific column's output
+col object_ddl format A32000;
+spool core_tables.sql
+
+SELECT DBMS_METADATA.GET_DDL('TABLE', TABLE_NAME, OWNER) as object_ddl
+FROM DBA_TABLES 
+WHERE OWNER = 'CORE'
+/
+spool off
+
+spool logging_tables.sql
+
+SELECT DBMS_METADATA.GET_DDL('TABLE', TABLE_NAME, OWNER) as object_ddl
+FROM DBA_TABLES 
+WHERE OWNER = 'LOGGING'
+/
+spool off
+
+spool services_tables.sql
+
+SELECT DBMS_METADATA.GET_DDL('TABLE', TABLE_NAME, OWNER) as object_ddl
+FROM DBA_TABLES 
+WHERE OWNER = 'SERVICES'
+/
+spool off
+
+spool accounts_tables.sql
+
+SELECT DBMS_METADATA.GET_DDL('TABLE', TABLE_NAME, OWNER) as object_ddl
+FROM DBA_TABLES 
+WHERE OWNER = 'ACCOUNTS'
+/
+spool off
+
